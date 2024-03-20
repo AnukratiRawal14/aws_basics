@@ -1,0 +1,21 @@
+Step-1: Go to ecr repo
+Step-2: Then click on Permissions
+Step-3: Edit Permissions
+Step-4: Click generate statement
+            Policy Type - Cross account replication
+            StatementId - cross_replica_ecr
+            Accounts    - Enter account from which you want to replicate
+              or
+        Edit with JSON
+            {
+              "Sid": "srr_account_replica",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::replicatedAccountId:root"
+              },
+              "Action": [
+                "ecr:CreateRepository",
+                "ecr:ReplicateImage"
+              ],
+              "Resource": "arn:aws:ecr:ap-south-1:SelfAccountId:repository/*"
+            }

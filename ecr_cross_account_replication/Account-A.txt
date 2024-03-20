@@ -1,0 +1,20 @@
+Step-1: Create ecr private repositories
+Step-2: Name the file and create repository
+Step-3: Go to settings:
+           1. Create replication configuration
+           2. Enable cross region replication and select region which we want to replicate
+           3. Enable cross account replication and select region and account which you want to replicate
+Step-4: Push the image:
+          Commands to push image:
+              1. Retrieve an authentication token and authenticate your Docker client to your registry.
+                    aws ecr get-login-password --region ap-south-1 --profile PROFILE_NAME | docker login --username AWS --password-stdin Account_Id.dkr.ecr.ap-south-1.amazonaws.com
+
+              2. Build your Docker image
+                    docker build -f Dockerfile.txt -t dev_image .
+
+              3. After the build completes, tag your image so you can push the image to this repository:
+                    docker tag dev_image:latest Account_Id.dkr.ecr.ap-south-1.amazonaws.com/dev_image:latest
+
+              4. Push this image to your newly created AWS repository
+                    docker push Account_Id.dkr.ecr.ap-south-1.amazonaws.com/dev_image:latest
+
