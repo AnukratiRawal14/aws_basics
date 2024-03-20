@@ -1,0 +1,46 @@
+Docker Registry
+docker images are stored 
+	docker run nginx
+            ngnix -> image name /repository name it also uses nginx/nginx
+        if you create you own respository in that case we write
+            image: user or account /image or repo 
+where are the images are pulled or dtored
+assumed that it is in dockerhub
+
+gcr.io/kubernetes-test-images/dnsutile  ---> image holder/registry
+
+Private Registry
+only can access via credentail
+
+docker login private-rgistry.io
+   Username: registry-user
+   Password: *******
+docker run private-registry.io/apps/internal-app
+
+Deploy Private Registry
+ docker run -d -p 5000:5000 --name registry registry:2  -->custom registry running on port 5000 on this dockerhost
+ docker image tag my-image localhost:5000/my-image  --> use image tag to tag the image for private registry url in this
+ docker push localhost:5000/my-image -->  now can push with docker registry detail
+ docker pull localhost:5000/my-image --> can pull form their
+ docker pull 192.168.56.100:50000/my-image --> if access form other laptop
+
+
+
+Let practice deploying a registry server on our own.
+Run a registry server with name equals to my-registry using registry:2 image with host port set to 5000, and restart policy set to always.
+Note: Registry server is exposed on port 5000 in the image.
+Here we are hosting our own registry using the open source Docker Registry.
+docker run -p 5000:5000 --name my-registry --restart=always registry:2
+
+
+Now its time to push some images to our registry server. Let's push two images for now .i.e. nginx:latest and httpd:latest.
+Note: Don't forget to pull them first.
+To check the list of images pushed , use curl -X GET localhost:5000/v2/_catalog
+ 
+Run: docker pull nginx:latest then docker image tag nginx:latest localhost:5000/nginx:latest and finally push it using docker push localhost:5000/nginx:latest.
+We will use the same steps for the second image docker pull httpd:latest and then docker image tag httpd:latest localhost:5000/httpd:latest and finally push it 
+using docker push localhost:5000/httpd:latest
+
+Let's remove all the dangling images we have locally. Use docker image prune -a to remove them. How many images do we have now?
+Note: Make sure we don't have any running containers except our registry-sever.
+To get list of images use: docker image ls
