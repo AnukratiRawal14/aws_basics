@@ -1,0 +1,257 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Prod infra configuration template
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      -
+        Label:
+          default: "Network Configuration"
+        Parameters:
+          - VpcName
+          - VpcCIDR
+          - publicSubnet1CIDR
+          - publicSubnet1Name
+          - publicSubnet2CIDR
+          - publicSubnet2Name
+          - publicSubnet3CIDR
+          - publicSubnet3Name
+          - frontendSubnet1CIDR
+          - frontendSubnet1Name
+          - frontendSubnet2CIDR
+          - frontendSubnet2Name
+          - frontendSubnet3CIDR
+          - frontendSubnet3Name
+          - backendSubnet1CIDR
+          - backendSubnet1Name
+          - backendSubnet2CIDR
+          - backendSubnet2Name
+          - backendSubnet3CIDR
+          - backendSubnet3Name
+          - publicRouteTableName
+          - frontendRouteTableName
+          - backendRouteTableName
+          - TgwName
+      -
+        Label:
+          default: "Tags"
+        Parameters:
+          - TagOwner
+          - TagEmail
+          - TagEnvironment
+      -
+        Label:
+          Default: "Nested template URL"
+        Parameters:
+          - NetworkStackUrl
+
+    ParameterLabels:
+        VpcName:
+          default: "Specify VPC Name"
+        VpcCIDR:
+          default: "Specify VPC CIDR"
+        publicSubnet1Name:
+          default: "Specify public subnet 1 name"
+        publicSubnet1CIDR:
+          default: "Specify public subnet 1 CIDR"
+        publicSubnet2Name:
+          default: "Specify public subnet 2 name"
+        publicSubnet2CIDR:
+          default: "Specify public subnet 2 CIDR"
+        publicSubnet3Name:
+          default: "Specify public subnet 3 name"
+        publicSubnet3CIDR:
+          default: "Specify public subnet 3 CIDR"
+        publicRouteTableName:
+          default: "Specify public route table name"
+        frontendSubnet1Name:
+          default: "Specify frontend subnet 1 name"
+        frontendSubnet1CIDR:
+          default: "Specify frontend subnet 1 cidr"
+        frontendSubnet2Name:
+          default: "Specify frontend subnet 2 name"
+        frontendSubnet2CIDR:
+          default: "Specify frontend subnet 2 cidr"
+        frontendSubnet3Name:
+          default: "Specify frontend subnet 3 name"
+        frontendSubnet3CIDR:
+          default: "Specify frontend subnet 3 cidr"
+        frontendRouteTableName:
+          default: "Specify frontend route table name"
+        backendSubnet1Name:
+          default: "Specify backend subnet 1 name"
+        backendSubnet1CIDR:
+          default: "Specify backend subnet 1 cidr"
+        backendSubnet2Name:
+          default: "Specify backend subnet 2 name"
+        backendSubnet2CIDR:
+          default: "Specify backend subnet 2 cidr"
+        backendSubnet3Name:
+          default: "Specify backend subnet 3 name"
+        backendSubnet3CIDR:
+          default: "Specify backend subnet 3 cidr"
+        backendRouteTableName:
+          default: "Specify backend route table name"
+        TgwName:
+          default: "Specify TGW name"
+        TagOwner:
+          default: "Specify Tag Owner"
+        TagEnvironment:
+          default: "Specify Tag environment"
+        TagEmail:
+          default: "Specify Tag email"
+        NetworkStackUrl:
+          default: "Specify Network URL"
+
+Parameters:
+    VpcName:
+      Description: Enter the name of VPC
+      Type: String
+      Default: underlay-vpc
+    VpcCIDR:
+      Description: Enter the IP range (CIDR) for VPC
+      Type: String
+      AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
+      ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+      Default: 172.27.192.0/20
+    publicSubnet1Name:
+      Description: Enter the name for public subnet 1
+      Type: String
+      Default: public-subnet-1
+    publicSubnet1CIDR:
+      Description: Enter the IP range (CIDR) for the public subnet in the first AZ
+      Type: String
+      Default: 172.27.192.0/24
+    publicSubnet2Name:
+      Description: Enter the name for public subnet 2
+      Type: String
+      Default: public-subnet-2
+    publicSubnet2CIDR:
+      Description: Enter the IP range (CIDR) for the public subnet in the second AZ
+      Type: String
+      Default: 172.27.193.0/24
+    publicSubnet3Name:
+      Description: Enter the name for public subnet 3
+      Type: String
+      Default: public-subnet-3
+    publicSubnet3CIDR:
+      Description: Enter the IP range (CIDR) for the public subnet in the third AZ
+      Type: String
+      Default: 172.27.194.0/24
+    frontendSubnet1Name:
+      Description: Enter the name for frontend subnet 1
+      Type: String
+      Default: frontend-subnet-1
+    frontendSubnet1CIDR:
+      Description: Enter the IP range (CIDR) for the frontend subnet in the first AZ
+      Type: String
+      Default: 172.27.195.0/24
+    frontendSubnet2Name:
+      Description: Enter the name for frontend subnet 2
+      Type: String
+      Default: frontend-subnet-2
+    frontendSubnet2CIDR:
+      Description: Enter the IP range (CIDR) for the frontend subnet in the second AZ
+      Type: String
+      Default: 172.27.196.0/24
+    frontendSubnet3Name:
+      Description: Enter the name for frontend subnet 3
+      Type: String
+      Default: frontend-subnet-3
+    frontendSubnet3CIDR:
+      Description: Enter the IP range (CIDR) for the frontend subnet in the third AZ
+      Type: String
+      Default: 172.27.197.0/24
+    backendSubnet1Name:
+      Description: Enter the name for backend subnet 1
+      Type: String
+      Default: backend-subnet-1
+    backendSubnet1CIDR:
+      Description: Enter the IP range (CIDR) for the backend subnet in the first AZ
+      Type: String
+      Default: 172.27.198.0/24
+    backendSubnet2Name:
+      Description: Enter the name for backend subnet 2
+      Type: String
+      Default: backend-subnet-2
+    backendSubnet2CIDR:
+      Description: Enter the IP range (CIDR) for the backend subnet in the second AZ
+      Type: String
+      Default: 172.27.199.0/24
+    backendSubnet3Name:
+      Description: Enter the name for backend subnet 3
+      Type: String
+      Default: backend-subnet-3
+    backendSubnet3CIDR:
+      Description: Enter the IP range (CIDR) for the backend subnet in the third AZ
+      Type: String
+      Default: 172.27.200.0/24
+    publicRouteTableName:
+      Description: Enter the name for public route table
+      Type: String
+      Default: public-route-table
+    frontendRouteTableName:
+      Description: Enter the name for frontend route table
+      Type: String
+      Default: frontend-route-table
+    backendRouteTableName:
+      Description: Enter the name for backend route table
+      Type: String
+      Default: backend-route-table
+    TgwName:
+      Description: Enter the name for transit gateway
+      Type: String
+      Default: tgw
+
+    # ---- Tags ---- #
+    TagOwner:
+      Type: String
+      Description: Owner tag
+      Default: Anukrati Rawal
+    TagEmail:
+      Type: String
+      Description: Email tag
+      Default: rawalanukrati20@gmail.com
+    TagEnvironment:
+      Type: String
+      Description: Environment tag
+      Default: Prod
+
+    # ---- Templates URL ---- #
+    NetworkStackUrl:
+      Type: String
+      Default: https://nynetworktemplate.s3.ap-south-1.amazonaws.com/network.yaml
+      Description: URL of the network template
+
+Resources:
+  NetworkStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Parameters:
+        VpcName: !Ref VpcName
+        VpcCIDR: !Ref VpcCIDR
+        publicSubnet1Name: !Ref publicSubnet1Name
+        publicSubnet1CIDR: !Ref publicSubnet1CIDR
+        publicSubnet2Name: !Ref publicSubnet2Name
+        publicSubnet2CIDR: !Ref publicSubnet2CIDR
+        publicSubnet3Name: !Ref publicSubnet3Name
+        publicSubnet3CIDR: !Ref publicSubnet3CIDR
+        frontendSubnet1Name: !Ref frontendSubnet1Name
+        frontendSubnet1CIDR: !Ref frontendSubnet1CIDR
+        frontendSubnet2Name: !Ref frontendSubnet2Name
+        frontendSubnet2CIDR: !Ref frontendSubnet2CIDR
+        frontendSubnet3Name: !Ref frontendSubnet3Name
+        frontendSubnet3CIDR: !Ref frontendSubnet3CIDR
+        backendSubnet1Name: !Ref backendSubnet1Name
+        backendSubnet1CIDR: !Ref backendSubnet1CIDR
+        backendSubnet2Name: !Ref backendSubnet2Name
+        backendSubnet2CIDR: !Ref backendSubnet2CIDR
+        backendSubnet3Name: !Ref backendSubnet3Name
+        backendSubnet3CIDR: !Ref backendSubnet3CIDR
+        publicRouteTableName: !Ref publicRouteTableName
+        frontendRouteTableName: !Ref frontendRouteTableName
+        backendRouteTableName: !Ref backendRouteTableName
+        TgwName: !Ref TgwName
+        TagOwner: !Ref TagOwner
+        TagEmail: !Ref TagEmail
+        TagEnvironment: !Ref TagEnvironment
+      TemplateURL: !Ref NetworkStackUrl
