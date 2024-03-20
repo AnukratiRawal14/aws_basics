@@ -9,16 +9,16 @@ Resources created:<br>
 In cloudformation template, we are using nested templates, where we are having main template and its calling other stack. <br>
 <br>
 
-AWSTemplateFormatVersion: '2010-09-09'<br>
+<pre>AWSTemplateFormatVersion: '2010-09-09'<br>
 Description: Prod infra configuration template<br>
 Metadata:<br>
    &emsp;AWS::CloudFormation::Interface:<br>
     &emsp;&emsp;&emsp;ParameterGroups:<br>
-       &emsp;&emsp;&emsp; &emsp; &emsp; &emsp;-<br>
-           &emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp; Label:<br>
+       &emsp;&emsp;&emsp; &emsp; &emsp; &emsp;-
+           &emsp;&emsp;&emsp; &emsp; &emsp;&emsp;Label:
            &emsp;&emsp; &emsp; &emsp;&emsp; &emsp;&emsp; &emsp; default: "Network Configuration"<br>
         &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; Parameters:<br>
-     &emsp;&emsp; &emsp; &emsp; &emsp;&emsp;&emsp; &emsp;-  VpcName<br>
+     &emsp;&emsp; &emsp; &emsp; &emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-  VpcName<br>
       &emsp;&emsp;&emsp;ParameterLabels:<br>
         &emsp; &emsp;&emsp; &emsp; &emsp;VpcName:<br>
            &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; default: "Specify VPC Name"<br>
@@ -34,3 +34,4 @@ Resources:<br>
        &emsp; &emsp; &emsp; &emsp;Parameters:<br>
          &emsp; &emsp; &emsp; &emsp; &emsp; VpcName: !Ref VpcName<br>
        &emsp; &emsp; &emsp; &emsp;TemplateURL: <br>
+</pre>
