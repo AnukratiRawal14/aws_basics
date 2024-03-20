@@ -1,0 +1,45 @@
+Considering Account B as destination account
+	
+Step-1: Create bucket
+Step-2: Untick block all public access
+Step-3: Enable bucket versioning
+Step-4: Go to permission and then edit bucket policy
+        {
+		"Version": "2008-10-17",
+		"Id": "",
+		"Statement": [
+			{
+				"Sid": "1",
+				"Effect": "Allow",
+				"Principal": {
+					"AWS": "arn:aws:iam::211989821556:role/service-role/s3crr_role_for_source-bucket-insta-a"
+				},
+				"Action": [
+					"s3:ReplicateObject",
+					"s3:ReplicateDelete"
+				],
+				"Resource": "arn:aws:s3:::destination-bucket-insta-a/folder_a/*"
+			},
+			{
+				"Sid": "2",
+				"Effect": "Allow",
+				"Principal": {
+					"AWS": "arn:aws:iam::211989821556:root"
+				},
+				"Action": "s3:ObjectOwnerOverrideToBucketOwner",
+				"Resource": "arn:aws:s3:::destination-bucket-insta-a/folder_a/*"
+			},
+			{
+				"Sid": "3",
+				"Effect": "Allow",
+				"Principal": {
+					"AWS": "arn:aws:iam::211989821556:role/service-role/s3crr_role_for_source-bucket-insta-a"
+				},
+				"Action": [
+					"s3:GetBucketVersioning",
+					"s3:PutBucketVersioning"
+				],
+				"Resource": "arn:aws:s3:::destination-bucket-insta-a"
+			}
+		]
+	}

@@ -1,0 +1,46 @@
+Considering Account A as source
+
+Step-1: Create bucket
+Step-2: Untick block all public access
+Step-3: Enable bucket versioning
+Step-4: Go to management section, once the bucket is created
+Step-5: Create replica rule, which contains iam role which contains (iam role name - s3crr_for_source-bucket)
+	InstA_api_prod_s3crr_for_hl-insta-new-prod_role {
+		"Version": "2012-10-17",
+		"Statement": [
+			{
+				"Action": [
+					"s3:ListBucket",
+					"s3:GetReplicationConfiguration",
+					"s3:GetObjectVersionForReplication",
+					"s3:GetObjectVersionAcl",
+					"s3:GetObjectVersionTagging",
+					"s3:GetObjectRetention",
+					"s3:GetObjectLegalHold"
+				],
+				"Effect": "Allow",
+				"Resource": [
+					"arn:aws:s3:::hl-insta-new-prod",
+					"arn:aws:s3:::hl-insta-new-prod/*",
+					"arn:aws:s3:::insta-api-preprod-data",
+					"arn:aws:s3:::insta-api-preprod-data/*"
+				]
+			},
+			{
+				"Action": [
+					"s3:ReplicateObject",
+					"s3:ReplicateDelete",
+					"s3:ReplicateTags",
+					"s3:ObjectOwnerOverrideToBucketOwner"
+				],
+				"Effect": "Allow",
+				"Resource": [
+					"arn:aws:s3:::hl-insta-new-prod/*",
+					"arn:aws:s3:::insta-api-preprod-data/*"
+				]
+			}
+		]
+     }
+	
+Step-6: enable bucket ownership, choose other aws accounts, enter account id
+	
