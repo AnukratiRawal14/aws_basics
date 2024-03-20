@@ -1,0 +1,22 @@
+Step 1: Create S3 bucket cross_account_lambda_access_s3_bucket
+Step 2: Enable versioning
+Step 3: Go to permissions
+            Edit bucket policy
+                {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                      {
+                          "Effect": "Allow",
+                          "Principal": {
+                              "AWS": "arn:aws:iam::aws1-account-A-number:role/your-role-name-in-aws1"
+                          },
+                          "Action": [
+                              "s3:GetObject",
+                              "s3:PutObject",
+                              "s3:PutObjectAcl"
+                          ],
+                          "Resource": "arn:aws:s3:::cross_account_lambda_access_s3_bucket/*"
+                      }
+                  ]
+                }
+Step 4: Upload a file in bucket
