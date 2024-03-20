@@ -1,26 +1,28 @@
 
 <h3>docker run </h3>
-run the container of an image.<br>
-In example:<br>&emsp;
-  <pre><b>docker run nginx</b> </pre>
-  this will run an instance of nginx<b></b><br>
-  If docker exist it will take it form the docker host if image is not present then it will go to docker hub and pull the image.<br>
-
-
+run the container of an image<br>
+<b>In example:</b><br>  &nbsp;
+  <pre>
+  <b>docker run nginx</b><br>
+  - this will run an instance of nginx<b></b><br> 
+  - If docker exist it will take it form the docker host if image is not present then it will go to docker hub and pull the image.
+  </pre>
+  
 <h3>docker ps</h3>
 list all running containers<br>
-It will give container id, name, created, image id and also shows only running containers<br>
-In example:<br>&emsp;
-  <pre><b>docker ps</b> </pre>
+<b>In example:</b><br>  &nbsp;
+  <pre>
+  <b>docker ps</b> <br>
+  - It will give container id, name, created, image id and also shows only running containers
+  </pre>
   
-
 <h3>docker ps -a</h3>
 check all the containers checking which containers are running or not<br>
-It will give container id, name, created, image id and also shows exited, paused, running<br>
-In example:<br> &emsp;
-  <pre><b>docker ps -a</b> </pre>
-  
-
+<b>In example:</b><br>  &nbsp;
+  <pre>
+  <b>docker ps -a</b> <br> 
+  - It will give container id, name, created, image id and also shows exited, paused, running
+  </pre>
 
 <pre>
     <h3>docker stop</h3>
