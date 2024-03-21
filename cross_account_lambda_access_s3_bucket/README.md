@@ -7,3 +7,8 @@ Account-B :<br> Create bucket policy in Account B by specifying role arn created
 To check : <br>
      Run the lambda function after deploying it.
 
+![image](https://github.com/AnukratiRawal14/aws_basics/assets/69693530/32adf01c-2d90-4491-8556-9cf9eb8bd896)
+
+
+
+
