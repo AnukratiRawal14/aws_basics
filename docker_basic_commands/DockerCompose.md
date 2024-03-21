@@ -1,5 +1,5 @@
-<h6> Docker Compose </h6>
-<h6> docker run vs docker compose </h6>
+<h5> Docker Compose </h5>
+<h5> docker run vs docker compose </h5>
 <h5> ---- docker run ---- </h5>
 <pre>
 docker run
@@ -12,36 +12,50 @@ docker run ansible
 <h5> docker-compose.yaml</h5>
 <pre>
 service:
-&nbsp;&nbsp;web:
-&nbsp;&nbsp;&nbsp;&nbsp;image:"mumshad/simple-webapp
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image:"mongodb"
-&nbsp;&nbsp;messaging:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image: "redis:alpine"
-&nbsp;&nbsp;&nbsp;&nbsp;orchestration:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    image: "ansible"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       run command --> docker-compose up
+    web:
+        image:"mumshad/simple-webapp
+        database:
+            image:"mongodb"
+        messaging:
+            image: "redis:alpine"
+        orchestration:
+            image: "ansible"
+	
+Run command --> docker-compose up
 </pre>
 
-Sample application
-voting app(python) --> DB(redis) votes stored in redis in-memory  --> worker(.net) takes votes and updates in postgress sql --> db(psotgress sql) updates the data --> result-app(nodeJS) showes the result 
+<h5> Sample Application Demo </h5>
+<pre>
+voting app(python) -->
+DB(redis) votes stored in redis in-memory --> <br>
+worker(.net) takes votes and updates in postgress sql --> <br>
+db(psotgress sql) updates the data --><br>
+result-app(nodeJS) showes the result
+</pre>
 
+<h5>Running all the containers</h5>
+<pre>
 docker run -d --name=redis redis
 docker run -d --name=db db
 docker run -d --name=vote -p 5000:80 voting-app
 docker run -d --name=result -p 5001:80 result-app
 docker run -d --name=worker worker
-we have successfully run all the container but haven't linked them
+---- we have successfully run all the container but haven't linked them ----
+</pre>
 
-docker run --links
- 	docker run -d --name=redis redis
-	docker run -d --name=db db
-	docker run -d --name=vote -p 5000:80 --link redis:redis voting-app  (create the entry in /etc/host file like 172.17.0.2(internal ip of redis conatiner redis 0000)
-	docker run -d --name=result -p 5001:80 --link db:db result-app
-	docker run -d --name=worker --link redis:redis --link db:db worker
-depricated
+<h5>Linking all the containers</h5>
+<b>docker run --links</b>
+<pre>
+docker run -d --name=redis redis
+docker run -d --name=db db
+docker run -d --name=vote -p 5000:80 --link redis:redis voting-app  (create the entry in /etc/host file like 172.17.0.2(internal ip of redis conatiner redis 0000)
+docker run -d --name=result -p 5001:80 --link db:db result-app
+docker run -d --name=worker --link redis:redis --link db:db worker
+(depricated)
+</pre>
 
-docker-compose.yml
+<h5>docker-compose.yml</h5>
+<pre>
 redis:
     image:redis
 db:
@@ -65,9 +79,10 @@ worker:
       - db  (=db:db)
 
 run --> docker-compose up
+</pre>
 
-
-docker compose build
+<h5>Docker Compose Build</h5>
+<pre>
      redis:
         image:redis
      db:
@@ -89,8 +104,10 @@ docker compose build
         links:
           - redis (=redi:redis)
           - db  (=db:db)
+</pre>
 
-docker version
+<h5>Docker Versions</h5>
+<pre>
     docker version has lot of limitation
     docker version 
         version: 2
@@ -104,24 +121,25 @@ docker version
                 ports:
                    - 5001:80
                 depens_on: 
-                   - redis
+                   - redis<br>
                
-In docker version 2, docker compose automatically creates 
-dedicated bridge network and then attached all container can communicate to service name
-to new network no need to use links also has depend on
+In docker version 2, docker compose automatically creates dedicated bridge network and then
+attached all container can communicate to service name to new network no need to use links also has depend on
 
-      version: 3
-      service
-            redis:
-                image:redis
-             db:
-                image:postgress:9.4
-             vote:
-                image: voting-app
-                ports:
-                   - 5001:80
+version: 3
+service
+    redis:
+	image:redis
+     db:
+	image:postgress:9.4
+     vote:
+	image: voting-app
+	ports:
+	   - 5001:80
+</pre>
 
-Docker compose 
+<h5>Docker Compose</h5>
+<pre>
 	need to seprate user generated traffic to backend network traffic
         version:2
         service: 
@@ -150,5 +168,4 @@ Docker compose
       networks:
           fornt-end:
           back-end:
- 
-
+</pre>
