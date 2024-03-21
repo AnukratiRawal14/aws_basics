@@ -1,23 +1,27 @@
-Docker Compose
-	docker run vs docker compose
-         docker run
-         docker run mmushad/simple-webapp
-         docker run mongodb
-         docker run redis:alpine
-         docker run ansible
-
-   docker-compose.yaml
-		service:
-		   web:
-		     image:"mumshad/simple-webapp
-                   database:
-                     image:"mongodb"
-                   messaging:
-		     image: "redis:alpine"
-		   orchestration:
-		     image: "ansible"
-         run coomand --> docker-compose up
-
+<h6> Docker Compose </h6>
+<h6> docker run vs docker compose </h6>
+<h5> ---- docker run ---- </h5>
+<pre>
+docker run
+docker run mmushad/simple-webapp
+docker run mongodb
+docker run redis:alpine
+docker run ansible
+</pre>
+<h5> ----- docker compose ----- </h5>
+<h5> docker-compose.yaml</h5>
+<pre>
+service:
+&nbsp;&nbsp;web:
+&nbsp;&nbsp;&nbsp;&nbsp;image:"mumshad/simple-webapp
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image:"mongodb"
+&nbsp;&nbsp;messaging:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image: "redis:alpine"
+&nbsp;&nbsp;&nbsp;&nbsp;orchestration:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    image: "ansible"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       run command --> docker-compose up
+</pre>
 
 Sample application
 voting app(python) --> DB(redis) votes stored in redis in-memory  --> worker(.net) takes votes and updates in postgress sql --> db(psotgress sql) updates the data --> result-app(nodeJS) showes the result 
