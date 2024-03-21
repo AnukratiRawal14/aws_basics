@@ -55,11 +55,11 @@
 
 <pre>
    <h6> ----- Scenario ------ </h6>
-        color = os.environ.get('APP_COLOR')
-        export APP_COLOR=blue; python app.py 
-        once this is docker image
-        docker run -e APP_COLOR=blue
-        docker inspect and find environment variables in config section
+    color = os.environ.get('APP_COLOR')
+    export APP_COLOR=blue; python app.py 
+    once this is docker image
+    docker run -e APP_COLOR=blue
+    docker inspect and find environment variables in config section
    <h6> ----- Solution -----</h6>
    <b>docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue kodeKloud/simple-webapp</b>
 </pre>
