@@ -70,7 +70,7 @@ we can run docker run ubuntu sleep 5 , but  we want it to be permanent in that c
 	dockerfile- ubuntu-sleeper
 	FROM Ubuntu
 	CMD sleep 5 or CMD["sleep","5"]
-	<b> run docker run ubuntu-sleeper </b>
+	Run command -> <b> run docker run ubuntu-sleeper </b>
 </pre>
 
 <h5> 
