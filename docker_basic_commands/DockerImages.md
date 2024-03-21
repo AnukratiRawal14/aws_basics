@@ -3,17 +3,15 @@
 <h5>In this case, we need to containerize an app i.e. simple web app build flask</h5>
 <h5>To deploy application manually, steps to taken care of:</h5>
 <pre>
-       <h5>----- Create my own image for single web application ------</h5>
-       <ul>
-<li>
-        Operation system - (ex- ubuntu)
-        Update apt repo - (update source repo)
-        Install dependencies using apt
-        Install python dependencies using pip
-        Copy source code ro /opt folder
-        Run web server use in flask command
-</li>
-      </ul>
+<h5>----- Create my own image for single web application ------</h5>
+<ul>
+    <li>Operation system - (ex- ubuntu)</li>
+    <li>Update apt repo - (update source repo)</li>
+    <li>Install dependencies using apt</li>
+    <li>Install python dependencies using pip</li>
+    <li>Copy source code ro /opt folder</li>
+    <li>Run web server use in flask command</li>
+</ul>
 </pre>
 
 <h5>Need to create docker file using this:</h5>
