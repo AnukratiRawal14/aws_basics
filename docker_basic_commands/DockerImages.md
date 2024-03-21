@@ -5,12 +5,14 @@
 <pre>
        <h5>----- Create my own image for single web application ------</h5>
        <ul>
+<li>
         Operation system - (ex- ubuntu)
         Update apt repo - (update source repo)
         Install dependencies using apt
         Install python dependencies using pip
         Copy source code ro /opt folder
         Run web server use in flask command
+</li>
       </ul>
 </pre>
 
