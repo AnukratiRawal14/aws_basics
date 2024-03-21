@@ -1,18 +1,17 @@
-Docker Engine - 
-A host with docker installed on it
- When you install docker on linux host actually install 3 different componnents -
+<h5> Docker Engine </h5>
+When you install docker on linux host actually install 3 different components -
    1. docker cli
    2. docker rest api server
    3. docker daemon
+<pre>
+Docker Daemon - Is a background process that manages docker objects 
+                   images, container, volumes, networks<br>
 
-1. Docker Daemon - Is a background process that manages docker objects 
-                   images, container, volumes, networks
+Docker REST API - Is the API interface that program used to talk to daemon and provide instruction also used own tool<br>
 
-2. Docker REST API - Is the API interface that program used to talk to daemon and provide instruction also used own tool
-
-3. Docker CLI - is command line interface to perform actions such as running, stopping containers, destroying images.
-                 It uses Rest API to interact with docker daemon
-
+Docker CLI - is command line interface to perform actions such as running, stopping containers, destroying images.
+                 It uses Rest API to interact with docker <br>
+<?pre>
 can access docker cli from other machine - docker-H=remote-docker-engine:2375
  Ex - docker -H=10.123.2.1:2375 run nginx
 
