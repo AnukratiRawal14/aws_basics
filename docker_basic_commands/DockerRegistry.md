@@ -29,11 +29,14 @@ Deploy Private Registry
 
 Let practice deploying a registry server on our own.
 <pre>
---------- scenario -----------
+--------- Scenario -----------
+    
 Run a registry server with name equals to my-registry using registry:2 image with host port set to 5000, and restart policy set to always.
 Note: Registry server is exposed on port 5000 in the image.
 Here we are hosting our own registry using the open source Docker Registry.
+    
 --------- Solution -----------
+    
 docker run -p 5000:5000 --name my-registry --restart=always registry:2
 </pre>
 
