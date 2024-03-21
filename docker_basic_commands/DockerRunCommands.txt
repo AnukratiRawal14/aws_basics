@@ -14,9 +14,9 @@ Run - PORT mapping
         for example - -p 8000:5000, -p 8001:5000, -p 3306:3306 mysql, -p 8306:3306 mysql
 
 Run - Volume mapping
-	Suppose you need to run mysql container and databse is stored in location /var/lib/mysql
+	Suppose you need to run mysql container and database is stored in location /var/lib/mysql
         as soon as you stop and remove it the data stored in database mysql will destroy
-        so to persist data map the directory outside the conatiner of the data host to a directory inside the container
+        so to persist data map the directory outside the container of the data host to a directory inside the container
      docker run -v /opt/datadir:/var/lib/mysql  (/opt/datadir-- outside directory)(var/lib/mysql - inside container)
 
 Run Inspect Container --> additional detail about the container 

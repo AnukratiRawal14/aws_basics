@@ -1,11 +1,12 @@
 Docker Compose
 	docker run vs docker compose
-	   docker run 
-		docker run mmushad/simple-webapp
-		docker run mongodb
-		docker run redis:alpine
-		docker run ansible
-	   docker-compose.yaml
+         docker run
+         docker run mmushad/simple-webapp
+         docker run mongodb
+         docker run redis:alpine
+         docker run ansible
+
+   docker-compose.yaml
 		service:
 		   web:
 		     image:"mumshad/simple-webapp
@@ -16,6 +17,7 @@ Docker Compose
 		   orchestration:
 		     image: "ansible"
          run coomand --> docker-compose up
+
 
 Sample application
 voting app(python) --> DB(redis) votes stored in redis in-memory  --> worker(.net) takes votes and updates in postgress sql --> db(psotgress sql) updates the data --> result-app(nodeJS) showes the result 
@@ -61,7 +63,7 @@ worker:
 run --> docker-compose up
 
 
-docker compse build
+docker compose build
      redis:
         image:redis
      db:

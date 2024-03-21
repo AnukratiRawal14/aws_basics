@@ -2,40 +2,39 @@ Docker Networking
 When we install docker, it creates 3 network automatically i.e. bridge, none, host
 Bridge
 is the default network, container got associated
-docker run ununtu
+docker run ubuntu
 none - docker run ubuntu --network=none
 host - docker run ubuntu --network=host
 
 Bridge Network -
-	Private internal network, created by docker on the host.All container get attached to it and they get internal ip in range 172.17.0.1
-        To access any of these container from the outside world map the port this contaiuner to outside port
+	Private internal network, created by docker on the host.All container get attached to it. they get internal ip in range 172.17.0.1
+        To access any of these container from the outside world map the port this container to outside port
 host Network
-	Another way to access this conatiner is associated to host network. This
-	takes out any network isolation btw docker host and docker conatiner. Automatically 
-        accessible on the same port without port mapping. Also mean wouldn't be able to run multiple conatiner on same ports
+	Another way to access this container is associated to host network. This
+	takes out any network isolation btw docker host and docker container. Automatically
+        accessible on the same port without port mapping. Also mean wouldn't be able to run multiple container on same ports
 None Network
        Container aren't attached to any network and also can't access any to the external network.
 
 User defined Networks
-what if we want to isolate the conatiner within the docker host(bridge)
+what if we want to isolate the container within the docker host(bridge)
 By default docker bridge creates one internal bridge network, 
-but we could create own own internal network
+but we could create own internal network
 
 docker network create --drive bridge --subnet 182.18.0.0/16 custom-isolated-network
 docker network ls
 
 Inspect Network
-docker inspect conatiner_name
+docker inspect container_name
 see in Network
 
 Embedded DNS
-	Container can reach each other by conatiner names.Docker has inbuilt DNS server to resolve each other using the conatiner name
+	Container can reach each other by container names.Docker has inbuilt DNS server to resolve each other using the conatiner name
         Build in DNS Server always run on 127.0.0.11
 
-How are conatiner isolated within the host-
+How are container isolated within the host -
 Docker uses network namespaces that create separate namespace for each container and uses virtual ethernet pairs to connect container together.
 Create a new network named wp-mysql-network using the bridge driver. Allocate subnet 182.18.0.1/24. Configure Gateway 182.18.0.1
-
 
 
 Deploy a mysql database using the mysql:5.6 image and name it mysql-db. Attach it to the newly created network wp-mysql-network

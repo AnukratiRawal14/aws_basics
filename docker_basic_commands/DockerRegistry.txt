@@ -1,18 +1,18 @@
 Docker Registry
 docker images are stored 
-	docker run nginx
-            ngnix -> image name /repository name it also uses nginx/nginx
-        if you create you own respository in that case we write
-            image: user or account /image or repo 
-where are the images are pulled or dtored
+docker run nginx
+nginx -> image name /repository name it also uses nginx/nginx
+if you create you own respository in that case we write
+    image: user or account /image or repo
+where are the images are pulled or stored
 assumed that it is in dockerhub
 
 gcr.io/kubernetes-test-images/dnsutile  ---> image holder/registry
 
 Private Registry
-only can access via credentail
+only can access via credentials
 
-docker login private-rgistry.io
+docker login private-registry.io
    Username: registry-user
    Password: *******
 docker run private-registry.io/apps/internal-app
