@@ -1,4 +1,4 @@
-<h5>When we create image,and we don't find image on docker hub</h5>
+<h5>When we create image, and we don't find image on docker hub. In this case we create our own custom image</h5>
 <h5>For example:</h5>
 <h5>In this case, we need to containerize an app i.e. simple web app build flask</h5>
 <h5>To deploy application manually, steps to taken care of:</h5>
