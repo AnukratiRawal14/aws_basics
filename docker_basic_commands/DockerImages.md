@@ -64,15 +64,13 @@
 </pre>
 
 <h6>Docker Command, Arguments and Entrypoint</h6>
-In docker file, CMD["nginx"] - define default command
-we can run docker run ubuntu sleep 5 , but  we want it to be permanent in that case
+<h5> In docker file, CMD["nginx"] - define default command <br>
+we can run docker run ubuntu sleep 5 , but  we want it to be permanent in that case </h5>
 <pre>
 	dockerfile- ubuntu-sleeper
 	FROM Ubuntu
-	
 	CMD sleep 5 or CMD["sleep","5"]
-	
-	now run docker run ubuntu-sleeper
+	<b> run docker run ubuntu-sleeper </b>
 </pre>
 
 <h5> 
