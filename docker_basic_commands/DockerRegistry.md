@@ -17,8 +17,9 @@ gcr.io/kubernetes-test-images/dnsutile  ---> image holder/registry
        Username: registry-user
        Password: *******
     Run Command - > docker run private-registry.io/apps/internal-app
-
-Deploy Private Registry
+</pre>
+<h5> Deploy Private Registry</h5>
+<pre>
  docker run -d -p 5000:5000 --name registry registry:2  -->custom registry running on port 5000 on this dockerhost
  docker image tag my-image localhost:5000/my-image  --> use image tag to tag the image for private registry url in this
  docker push localhost:5000/my-image -->  now can push with docker registry detail
@@ -41,16 +42,18 @@ docker run -p 5000:5000 --name my-registry --restart=always registry:2
 </pre>
 
 <pre>
+------------------- Scenario --------------------------
 Now, its time to push some images to our registry server. Let's push two images for now .i.e. nginx:latest and httpd:latest.
 Note: Don't forget to pull them first.
 To check the list of images pushed , use curl -X GET localhost:5000/v2/_catalog
 
+------------------ Solution ---------------------------
+    
 <b>Run:docker pull nginx:latest </b>
-
-then docker image tag nginx:latest localhost:5000/nginx:latest 
-and finally push it using docker push localhost:5000/nginx:latest.
+then <b>docker image tag nginx:latest localhost:5000/nginx:latest</b> 
+and finally push it using <b> docker push localhost:5000/nginx:latest</b>
 We will use the same steps for the second image docker pull httpd:latest and 
-then docker image tag httpd:latest localhost:5000/httpd:latest and finally push it 
-using docker push localhost:5000/httpd:latest
+then <b> docker image tag httpd:latest localhost:5000/httpd:latest<b> and
+finally push it using <b> docker push localhost:5000/httpd:latest </b>
 </pre>
 
