@@ -80,10 +80,10 @@ we can run docker run ubuntu sleep 5 , but  we want it to be permanent in that c
 <pre>
 	FROM Ubuntu
 	ENTRYPOINT["sleep"]
-	so now you can run docker run ubuntu-sleeper 10 
+	Run command -><b> docker run ubuntu-sleeper 10 </b>
 </pre>
 
-<h5>Incase cmd if we pass sleep 10 in command, it will get replaced 5 by 10 and in entrypoint it will get append by 10 <br>
+<h5>In case of cmd if we pass sleep 10 in command, it will get replaced 5 by 10 and in entrypoint it will get append by 10 <br>
 so if you have to pass default value and then append in that case </h5>
 <pre>
 	FROM Ubuntu
