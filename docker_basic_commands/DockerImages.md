@@ -4,12 +4,14 @@
 <h5>To deploy application manually, steps to taken care of:</h5>
 <pre>
        <h5>----- Create my own image for single web application ------</h5>
-       <li> Operation system - (ex- ubuntu)</li>
-       <li> Update apt repo - (update source repo)</li>
-       <li> Install dependencies using apt</li>
-       <li> Install python dependencies using pip</li>
-       <li> Copy source code ro /opt folder</li>
-       <li> Run web server use in flask command</li>
+       <ul>
+        Operation system - (ex- ubuntu)
+        Update apt repo - (update source repo)
+        Install dependencies using apt
+        Install python dependencies using pip
+        Copy source code ro /opt folder
+        Run web server use in flask command
+      </ul>
 </pre>
 
 <h5>Need to create docker file using this:</h5>
@@ -53,13 +55,13 @@
 
 <h3>Docker environment variables</h3>
 <pre>
-   <h6> ----- Scenario ------ </h6>
+   <h5> ----- Scenario ------ </h5>
     color = os.environ.get('APP_COLOR')
     export APP_COLOR=blue; python app.py 
     once this is docker image
     docker run -e APP_COLOR=blue
     docker inspect and find environment variables in config section
-   <h6> ----- Solution -----</h6>
+   <h5> ----- Solution -----</h5>
    <b>docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue kodeKloud/simple-webapp</b>
 </pre>
 
