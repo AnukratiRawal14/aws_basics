@@ -1,0 +1,64 @@
+YAML in kubernetes
+Pods with YAML
+kubernetes file contains 4 top level fields or root level properties
+	1. apiVersion:
+	2. kind:
+	3. metadata:
+	4. spec:
+
+apiVesion: version of kubernetes API using to create the objects.Depending what we create we must specify right API version.
+kind: Refers to the type of object we are trying to create which in this case happens to be pod
+like replicaSet, deployment, service
+metadata: data about the object like its name, labels ect this is on form of dictionary(can have dictionary inside the dictionary)
+spec: specification section, this is where we provide additional information to kuberenets to that object
+
+apiVersion: v1
+kind: Pod
+metadata:
+	name: myapp-pod
+	labels: 
+		app: myapp
+		type: front-end
+spec:
+	containers:
+	 - name : nginx-container
+	   image: nginx
+	   
+kubectl create -f pod.defination.yml
+
+Once you create pod:
+	To see list of pods available:
+		kubectl get pods
+
+    To see the detail decription of the pod:
+		kubectl decribe pod myapp-pod
+		
+Demo 
+Craete a YAML file with the pod specifications in it
+Using vim command editor to create our pod defination file
+	linux terminal
+	vim pod.defiantion.yaml
+		apiVersion: v1
+		kind: Pod
+		metadata:
+			name: nginx
+			labels:
+				app: nginx
+				tier: frontend
+		spec:
+			containers:
+			  - name: nginx
+			    image: nginx
+esp :wq!
+
+to check intendation - cat pod.yaml
+
+kubectl create and apply work same
+kubectl apply -f pod.yaml
+kubectl get pods
+kubectl describe pod nginx
+
+
+
+
+

@@ -1,0 +1,130 @@
+Replication Controller
+
+Controller are the brain behimd the kubernetes, that monitor kubernetes objects
+and respond accordingly
+
+Why we need replication controller
+
+ High Availability
+	what if application clashes and pod fails so use won't able to access the application.
+	we want to have application in that case we want more than one instance to be runninf
+	if one fails that other pod is ruuning at same time.
+	
+	To prevent application, we can more than one instance at same time
+	replication controller help us run multiple container at same time and provide high availability
+	
+	Also, we can use replication controller for single pod, repliaction controller can help by automatic bring new pod when exisitng once fails
+	
+	Replication controller make sure availability of pod as specified.
+
+ LoadBalancing & Scaling
+    Create multiple pods to share the loads across them
+	for ex:
+      Single user is there can access pod but if no of users increases, we deployed additional pod accross the two pods
+	  if demand increases we could deploy additional pods across the other nodes in the cluster
+	
+	   node 1, node 2 --> pod,pod, pod pod
+	   in replication controller pod share in different nodes 
+
+Replication Controller vs Replication Set
+    there is minor difference between 
+    Replicaset is new one 
+
+Replication Controller Ex:
+
+    lets create replication file -  rc-deployment.yml
+	apiVersion:
+	kind:
+	metadata:
+	    name: myapp-rc
+	    labels: 
+	      app: myapp
+		  type: front-end
+	spec:(define what inside the object we are creating) --> Replication Controller
+		template: (create to provide a pod template to be used by the replicayion controller to create replicas)
+	---------- POD Section--------------------	
+     		metadata:
+				name: myapp-prod
+				labels:
+					app: myapp
+					type: fornt-end
+				spec:  ----> POD
+					containers:
+						- name: nginx-controller
+						  image: nginx
+	---------------------------------------------
+	    replicas: 3
+
+we have 2 spec section one for each
+Now run -> kubectl create -f rc-defination.yml
+To check repliaction run-> kubectl get replicationcontroller
+To checks the pods run -> kubectl get pods
+
+Replica Set Ex:
+	replicaset-defination.yml
+	
+	apiVersion: apps/v1
+	kind: ReplicaSet
+	metadata: 
+		name: myapp-replicaset
+	    labels: 
+	      app: myapp
+		  type: front-end
+	spec:
+	    template: (create to provide a pod template to be used by the replicayion controller to create replicas)
+---------- POD Section--------------------	
+			metadata:
+				name: myapp-prod
+				labels:
+					app: myapp
+					type: fornt-end
+				spec:  ----> POD
+					containers:
+						- name: nginx-controller
+						  image: nginx
+---------------------------------------------
+		replicas: 3
+		selector: 
+			matchlabels: 
+				type: front-end
+
+run -> kubectl create -f replicaset-defination.yml
+run-> kubectl get replicaset\
+run-> kubectl get pods
+
+			
+ReplicaSet rquires selector defination  
+Selector(not required) -> identify whaat pod falls under it, why do we need to specify 
+            if we have provided container of the pods)
+			Because: replicaset can also manage pods that were not creating at time of replica creation for ex pod already created and it get matched by the labels, so it will also consider those pods so we use selector)
+			
+	
+Labels & Selector
+	Can provide labels as filter and in selector section under matchlabels we provide the same labels that we use in creating pods
+	
+Scale ReplicaSet
+	To update replicaset 
+	run -> kubectl replace -f replicateset-definition.yml
+	                    or 
+    run -> kubectl scale --replicas=6 -f replicaset-defination.yml
+						or 
+	run-> kubectl scale --replicas=6 replicaset(type) myapp-replicateset(name)
+	
+	Even though you scale replicaset to 6, it will not show in configuration file
+	                    
+
+Commands
+create replica set or any object depending on the file that we provide as input by -f parameter
+run -> kubectl create -f replicaset-defination.yml
+
+To see the list of repliac sets
+run -> kubectl get replicaset
+
+To delete replicaset (Also delete all underlying PODs)
+kubectl delete replicaset myapp-replicaset
+
+To replca or update the replicaset 
+kubectl replace -f replicaset-definition.yml
+
+To scale without having to modify the file
+kubectl scale --replicas=6 -f replicaset-definition.yml
